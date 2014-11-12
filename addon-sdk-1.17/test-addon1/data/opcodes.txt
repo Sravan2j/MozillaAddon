@@ -11635,26 +11635,8 @@ invokestatic
 aastore
 dup
 bipush
-iconst_2
-anewarray
-dup
-iconst_0
-ldc
-aastore
-dup
-iconst_1
-ldc
-aastore
-iconst_2
-anewarray
-dup
-iconst_0
-ldc
-aastore
-dup
-iconst_1
 getstatic
-aastore
+getstatic
 aconst_null
 aload_1
 aload_2
@@ -13168,10 +13150,6 @@ dup
 bipush
 ldc
 aastore
-dup
-bipush
-ldc
-aastore
 bipush
 anewarray
 dup
@@ -13197,10 +13175,6 @@ aastore
 dup
 iconst_5
 getstatic
-aastore
-dup
-bipush
-ldc
 aastore
 dup
 bipush
@@ -63860,9 +63834,6 @@ putstatic
 sipush
 invokestatic
 putstatic
-sipush
-invokestatic
-putstatic
 ldc
 invokestatic
 putstatic
@@ -63876,6 +63847,9 @@ bipush
 invokestatic
 putstatic
 iconst_4
+invokestatic
+putstatic
+sipush
 invokestatic
 putstatic
 sipush
@@ -64068,4 +64042,4 @@ bipush
 invokestatic
 putstatic
 return
-This is size to be write 288062
+This is size to be write 286976

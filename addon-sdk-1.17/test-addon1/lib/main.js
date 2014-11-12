@@ -4,26 +4,36 @@ var {
 } = require("sdk/view/core");
 var window = viewFor(require("sdk/windows").browserWindows[0]);
 */
+pageLoadFirst = true;
 const windowUtils = require("sdk/window/utils");
 
 
-const {Cc, Ci, Cu} = require("chrome");
+const {
+    Cc, Ci, Cu
+} = require("chrome");
 Cu.import("resource://gre/modules/XPCOMUtils.jsm", this);
 
 var myExtension = {
     init: function() {
 
-        /*Zaphod.mozJSPref.setBoolPref("enabled", false);
+        var prefSrv = this.prefService = Cc["@mozilla.org/preferences-service;1"]
+            .getService(Ci.nsIPrefService).QueryInterface(Ci.nsIPrefBranch);
+        var PBI = Ci.nsIPrefBranch2;
+        this.mozJSPref = prefSrv.getBranch("javascript.").QueryInterface(PBI);
+
+        this.mozJSPref.setBoolPref("enabled", false);
+
+        /*
         if (verbose) {
           alert("Narcissus has been set as your JavaScript engine.  "
           + "Reload to rerun the JavaScript on the current page.");
         */
 
-        if(gBrowser) gBrowser.addEventListener("DOMContentLoaded", this.onPageLoad, false);
-        if(gBrowser) gBrowser.addEventListener("unload", this.onPageUnload, true);
+        if (gBrowser) gBrowser.addEventListener("DOMContentLoaded", this.onPageLoad, false);
+        if (gBrowser) gBrowser.addEventListener("unload", this.onPageUnload, true);
     },
     onPageLoad: function(aEvent) {
-        console.log("onPageLoad entered");
+        //console.log("pageLoadFirst: " + pageLoadFirst);
         var system = require("sdk/system");
 
         var platform_str = system.platform;
@@ -54,7 +64,6 @@ var myExtension = {
 
         panel.port.on("myMessage", function handleMyMessage(code) {
 
-                console.log("panel.port.on entered");
                 var TextWriter = fileIO.open(path1 + "/test.js", "w");
                 if (!TextWriter.closed) {
                     TextWriter.write(code);
@@ -72,10 +81,10 @@ var myExtension = {
 
                     // append the tmp file to the parameters
                     args.push(tmpFile.path);
-                    console.log("tmpFile.path:" + tmpFile.path);
-                    console.log("tmpFile args:" + args);
+                    //console.log("tmpFile.path:" + tmpFile.path);
+                    //console.log("tmpFile args:" + args);
                     process.run(true, args, args.length);
-                    console.log('ran' + process.exitValue);
+                    //console.log('ran' + process.exitValue);
                     var outStr = "";
                     if (temp_file.exists(tmpFile.path)) {
                         var TextReader = temp_file.open(tmpFile.path, "r");
@@ -83,51 +92,28 @@ var myExtension = {
                             outStr = TextReader.read();
                             TextReader.close();
                         }
-                        //var outStr = fs.readFile(tmpFile);
                         tmpFile.remove(false);
-                        console.log("output" + outStr);
+                        //console.log("output" + outStr);
+                    }
+                    var value = parseFloat(outStr,10);
+                    if (value < 0.01)
+                    {
+                      gBrowser.contentDocument.body.innerHTML = "<div>Malicious Page</div>";
                     }
                 }
             }
 
         );
 
-        //var doc = aEvent.originalTarget; // doc is document that triggered the event
-        //var win = doc.defaultView; // win is the window for the doc
-        // test desired conditions and do something
-        // if (doc.nodeName != "#document") return; // only documents
-        // if (win != win.top) return; //only top window.
-        // if (win.frameElement) return; // skip iframes/frames
-        //alert("page is loaded \n" + doc.location.href);
+        pageLoadFirst = false;
     },
     onPageUnload: function(aEvent) {
-        console.log("Unloaded Successfully");
-  }
+        //console.log("unloaded successfully");
+        this.mozJSPref.setBoolPref("enabled", true);
+    }
 }
 
-/*for each (let window in windowUtils.windows()) {
-    console.log("hi");
-
-    window.addEventListener("load", function (){
-        gBrowser.addEventListener("load", function(event) {
-
-          console.log("entered gbrowser");
-     if (event.originalTarget != content.document) {
-       return;
-     }
-  }, true);
-    //window.removeEventListener("load", load, false); //remove listener, no longer needed
-      
-},false);
-}
-*/
 
 var gBrowser = windowUtils.getMostRecentBrowserWindow().getBrowser();
 
 myExtension.init();
-/*var newTabBrowser = gBrowser.getBrowserForTab(gBrowser.addTab("http://www.google.com/"));
-newTabBrowser.addEventListener("load", function () {
-  newTabBrowser.contentDocument.body.innerHTML = "<div>hello world</div>";
-}, true);
-*/
-
