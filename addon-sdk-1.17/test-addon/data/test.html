@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p id="demo"></p>
+
+<script>
+
+var OSName="Unknown OS";
+if (navigator.appVersion.indexOf("Win")!=-1) OSName="Windows";
+if (navigator.appVersion.indexOf("Mac")!=-1) OSName="MacOS";
+if (navigator.appVersion.indexOf("X11")!=-1) OSName="UNIX";
+if (navigator.appVersion.indexOf("Linux")!=-1) OSName="Linux";
+
+document.write('Your OS: '+OSName);
+
+</script>
+
+<p>Try to experiment with the // comments.</p>
+
+</body>
+</html>
+
+
