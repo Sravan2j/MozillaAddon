@@ -103,10 +103,10 @@ var myExtension = {
                                 TextReader.close();
                             }
                             tmpFile.remove(false);
-                            console.log("output" + outStr);
+                            //console.log("output" + outStr);
                         }
                         var value = parseFloat(outStr, 10);
-                        console.log("value" + value);
+                        //console.log("value" + value);
                         if (value < 0.01) {
                             gBrowser.contentDocument.body.innerHTML = "<div>Malicious Page</div>";
                         } else {
@@ -117,7 +117,9 @@ var myExtension = {
                             this.mozJSPref = prefSrv.getBranch("javascript.").QueryInterface(PBI);
                             this.mozJSPref.setBoolPref("enabled", true);
                             addonReloadRequest = true;
-                            console.log(addonReloadRequest);
+                            tabs.activeTab.reload(1);
+                            //console.log("addonReloadRequest"+tabs.activeTab.url);
+                            //windowUtils.location.reload(1);
                         }
                     }
                 }
