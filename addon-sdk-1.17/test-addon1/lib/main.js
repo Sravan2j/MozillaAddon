@@ -129,6 +129,7 @@ var myExtension = {
 
 
         }
+        addonReloadRequest = false;
     },
     onPageUnload: function(aEvent) {
         var prefSrv = this.prefService = Cc["@mozilla.org/preferences-service;1"]
