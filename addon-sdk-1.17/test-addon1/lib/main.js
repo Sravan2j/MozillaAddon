@@ -4,8 +4,20 @@ var {
 } = require("sdk/view/core");
 var window = viewFor(require("sdk/windows").browserWindows[0]);
 */
+
+/*--- for unit testing ---*/
+var {
+    viewFor
+} = require("sdk/view/core");
+
+var window = viewFor(require("sdk/windows").browserWindows[0]);
+/*--- for unit testing ---*/
+
+
 const windowUtils = require("sdk/window/utils");
 addonReloadRequest = false;
+start = 0;
+end = 0;
 const {
     Cc, Ci, Cu
 } = require("chrome");
@@ -14,7 +26,7 @@ Cu.import("resource://gre/modules/XPCOMUtils.jsm", this);
 var myExtension = {
     init: function() {
         addonReloadRequest = false;
-
+        
         //console.log(addonReloadRequest);
 
         if (addonReloadRequest == false) {
@@ -38,7 +50,7 @@ var myExtension = {
 
     },
     onPageLoad: function(aEvent) {
-
+        start = new Date();
         //console.log(addonReloadRequest+"onload");
 
         if (addonReloadRequest == false) {
@@ -106,8 +118,10 @@ var myExtension = {
                             //console.log("output" + outStr);
                         }
                         var value = parseFloat(outStr, 10);
-                        //console.log("value" + value);
+                        console.log("value" + value);
+                        
                         if (value < 0.01) {
+                            console.log("malicious page");
                             gBrowser.contentDocument.body.innerHTML = "<div>Malicious Page</div>";
                         } else {
                             console.log("not a malicious page");
@@ -121,6 +135,12 @@ var myExtension = {
                             //console.log("addonReloadRequest"+tabs.activeTab.url);
                             //windowUtils.location.reload(1);
                         }
+                        end = new Date();
+                        console.log("Elapsed time: "+(end.getTime() - start.getTime()));
+
+                        /*--- for unit testing ---*/
+                        //window.close()
+
                     }
                 }
 
@@ -129,6 +149,7 @@ var myExtension = {
 
 
         }
+
         addonReloadRequest = false;
     },
     onPageUnload: function(aEvent) {

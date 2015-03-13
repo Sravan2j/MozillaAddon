@@ -1,0 +1,3 @@
+content   test-addon              content/
+skin      test-addon  classic/1.0 skin/
+locale    test-addon  en-US       locale/en-US/

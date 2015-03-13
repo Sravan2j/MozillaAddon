@@ -1,0 +1,6 @@
+Using binary at '/Applications/Firefox.app/Contents/MacOS/firefox-bin'.
+Using profile at '/var/folders/y8/w18vnqyx6492t30xqhgffgc80000gn/T/tmpWLRCFP.mozrunner'.
+JavaScript warning: resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/loader/sandbox.js -> resource://jid1-1v0oilcrgw96qg-at-jetpack/test-addon/data/jquery-1.10.0.min.js, line 1: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+console.log: test-addon: value0.00147929
+console.log: test-addon: malicious page
+console.log: test-addon: Elapsed time: 1213
