@@ -1,0 +1,16 @@
+Using binary at '/Applications/Firefox.app/Contents/MacOS/firefox-bin'.
+Using profile at '/var/folders/y8/w18vnqyx6492t30xqhgffgc80000gn/T/tmpvqExHE.mozrunner'.
+JavaScript warning: resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/loader/sandbox.js -> resource://jid1-1v0oilcrgw96qg-at-jetpack/test-addon/data/jquery-1.10.0.min.js, line 1: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+java.net.MalformedURLException: no protocol: typeface.nytimes.com/zam5nzz.js
+	at java.net.URL.<init>(URL.java:585)
+	at java.net.URL.<init>(URL.java:482)
+	at java.net.URL.<init>(URL.java:431)
+	at ImageDownloader.download(ImageDownloader.java:30)
+	at DownloadThread.run(DownloadThread.java:17)
+console.error: test-addon: 
+  Message: [Exception... "Component returned failure code: 0x80520003 (NS_ERROR_FILE_EXECUTION_FAILED) [nsIProcess.run]"  nsresult: "0x80520003 (NS_ERROR_FILE_EXECUTION_FAILED)"  location: "JS frame :: resource://gre/modules/addons/XPIProvider.jsm -> jar:file:///var/folders/y8/w18vnqyx6492t30xqhgffgc80000gn/T/tmpvqExHE.mozrunner/extensions/jid1-1v0oIlCRGW96Qg@jetpack.xpi!/bootstrap.js -> resource://gre/modules/commonjs/toolkit/loader.js -> resource://jid1-1v0oilcrgw96qg-at-jetpack/test-addon/lib/main.js :: handleMyMessage :: line 108"  data: no]
+  Stack:
+    handleMyMessage@resource://gre/modules/addons/XPIProvider.jsm -> jar:file:///var/folders/y8/w18vnqyx6492t30xqhgffgc80000gn/T/tmpvqExHE.mozrunner/extensions/jid1-1v0oIlCRGW96Qg@jetpack.xpi!/bootstrap.js -> resource://gre/modules/commonjs/toolkit/loader.js -> resource://jid1-1v0oilcrgw96qg-at-jetpack/test-addon/lib/main.js:108:24
+emit@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/event/core.js:97:8
+receive@resource://gre/modules/addons/XPIProvider.jsm -> jar:file:///var/folders/y8/w18vnqyx6492t30xqhgffgc80000gn/T/tmpvqExHE.mozrunner/extensions/jid1-1v0oIlCRGW96Qg@jetpack.xpi!/bootstrap.js -> resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/content/worker-parent.js:81:25
+

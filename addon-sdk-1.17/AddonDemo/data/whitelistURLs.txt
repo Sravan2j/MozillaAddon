@@ -1,0 +1,4 @@
+https://www.google.com/?gws_rd=ssl
+https://www.google.com/?gws_rd=ssl
+http://www.sjsu.edu/
+http://www.nvidia.com/content/global/global.php
